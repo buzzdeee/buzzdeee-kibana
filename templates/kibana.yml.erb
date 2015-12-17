@@ -1,0 +1,151 @@
+# This file is maintained via Puppet
+#
+#
+# Kibana is served by a back end server. This controls which port to use.
+# server.port: 5601
+<% if @server_port -%>
+server.port: <%= @server_port %>
+<% end -%>
+
+# The host to bind the server to.
+# server.host: "0.0.0.0"
+<% if @server_host -%>
+server.host: "<%= @server_host %>"
+<% end -%>
+
+# If you are running kibana behind a proxy, and want to mount it at a path,
+# specify that path here. The basePath can't end in a slash.
+# server.basePath: ""
+<% if @server_basepath -%>
+server.basePath: "<%= @server_basepath %>"
+<% end -%>
+
+# The Elasticsearch instance to use for all your queries.
+# elasticsearch.url: "http://localhost:9200"
+<% if @elasticsearch_url -%>
+elasticsearch.url: "<%= @elasticsearch_url %>"
+<% end -%>
+
+# preserve_elasticsearch_host true will send the hostname specified in `elasticsearch`. If you set it to false,
+# then the host you use to connect to *this* Kibana instance will be sent.
+# elasticsearch.preserveHost: true
+<% if @elasticsearch_preservehost -%>
+elasticsearch.preserveHost: <%= @elasticsearch_preservehost %>
+<% end -%>
+
+# Kibana uses an index in Elasticsearch to store saved searches, visualizations
+# and dashboards. It will create a new index if it doesn't already exist.
+# kibana.index: ".kibana"
+<% if @kibana_index -%>
+kibana.index: <%= @kibana_index %>
+<% end -%>
+
+# The default application to load.
+# kibana.defaultAppId: "discover"
+<% if @kibana_defaultappid -%>
+kibana.defaultAppId: <%= @kibana_defaultappid %>
+<% end -%>
+
+# If your Elasticsearch is protected with basic auth, these are the user credentials
+# used by the Kibana server to perform maintenance on the kibana_index at startup. Your Kibana
+# users will still need to authenticate with Elasticsearch (which is proxied through
+# the Kibana server)
+# elasticsearch.username: "user"
+# elasticsearch.password: "pass"
+<% if @elasticsearch_username -%>
+elasticsearch.username: <%= @elasticsearch_username %>
+<% end -%>
+<% if @elasticsearch_password -%>
+elasticsearch.password: <%= @elasticsearch_password %>
+<% end -%>
+
+# SSL for outgoing requests from the Kibana Server to the browser (PEM formatted)
+# server.ssl.cert: /path/to/your/server.crt
+# server.ssl.key: /path/to/your/server.key
+<% if @server_ssl_cert -%>
+server.ssl.cert: <%= @server_ssl_cert %>
+<% end -%>
+<% if @server_ssl_key -%>
+server.ssl.key: <%= @server_ssl_key %>
+<% end -%>
+
+# Optional setting to validate that your Elasticsearch backend uses the same key files (PEM formatted)
+# elasticsearch.ssl.cert: /path/to/your/client.crt
+# elasticsearch.ssl.key: /path/to/your/client.key
+<% if @elasticsearch_ssl_cert -%>
+elasticsearch.ssl.cert: <%= @elasticsearch_ssl_cert %>
+<% end -%>
+<% if @elasticsearch_ssl_key -%>
+elasticsearch.ssl.key: <%= elasticsearch_ssl_key %>
+<% end -%>
+
+# If you need to provide a CA certificate for your Elasticsearch instance, put
+# the path of the pem file here.
+# elasticsearch.ssl.ca: /path/to/your/CA.pem
+<% if @elasticsearch_ssl_ca -%>
+elasticsearch.ssl.ca: <%= @elasticsearch_ssl_ca %>
+<% end -%>
+
+# Set to false to have a complete disregard for the validity of the SSL
+# certificate.
+# elasticsearch.ssl.verify: true
+<% if @elasticsearch_ssl_verify -%>
+elasticsearch.ssl.verify: <%= @elasticsearch_ssl_verify %>
+<% end -%>
+
+# Time in milliseconds to wait for elasticsearch to respond to pings, defaults to
+# request_timeout setting
+# elasticsearch.pingTimeout: 1500
+<% if @elasticsearch_pingtimeout -%>
+elasticsearch.pingTimeout: <%= @elasticsearch_pingtimeout %>
+<% end -%>
+
+# Time in milliseconds to wait for responses from the back end or elasticsearch.
+# This must be > 0
+# elasticsearch.requestTimeout: 300000
+<% if @elasticsearch_requesttimeout -%>
+elasticsearch.requestTimeout: <%= @elasticsearch_requesttimeout %>
+<% end -%>
+
+# Time in milliseconds for Elasticsearch to wait for responses from shards.
+# Set to 0 to disable.
+# elasticsearch.shardTimeout: 0
+<% if @elasticsearch_shardtimeout -%>
+elasticsearch.shardTimeout: <%= @elasticsearch_shardtimeout %>
+<% end -%>
+
+# Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying
+# elasticsearch.startupTimeout: 5000
+<% if @elasticsearch_startuptimeout -%>
+elasticsearch.startupTimeout: <%= @elasticsearch_startuptimeout %>
+<% end -%>
+
+# Set the path to where you would like the process id file to be created.
+# pid.file: /var/run/kibana.pid
+<% if @pid_file -%>
+pid.file: <%= @pid_file %>
+<% end -%>
+
+# If you would like to send the log output to a file you can set the path below.
+# logging.dest: stdout
+<% if @logging_dest -%>
+logging.dest: <%= @logging_dest %>
+<% end -%>
+
+# Set this to true to suppress all logging output.
+# logging.silent: false
+<% if @logging_silent -%>
+logging.silent: <%= @logging_silent %>
+<% end -%>
+
+# Set this to true to suppress all logging output except for error messages.
+# logging.quiet: false
+<% if @logging_quiet -%>
+logging.quiet: <%= @logging_quiet %>
+<% end -%>
+
+# Set this to true to log all events, including system usage information and all requests.
+# logging.verbose: false
+<% if @logging_verbose -%>
+logging.verbose: <%= @logging_verbose %>
+<% end -%>

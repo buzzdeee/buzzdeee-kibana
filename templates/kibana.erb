@@ -11,10 +11,11 @@ daemon_user="<%= @sysuser %>"
 pexp=".*/usr/local/kibana/bin/kibana serve --config /etc/kibana.yml"
 
 rc_reload=NO
-rc_bg=YES
+rc_bg=YES	# for whatever reason, the & was necessary, in order
+                # to actually really got to background
 
 rc_start() {
-	${rcexec} ${daemon} serve ${daemon_flags}
+	${rcexec} ${daemon} serve ${daemon_flags} &
 }
 
 rc_pre() {

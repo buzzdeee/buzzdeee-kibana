@@ -9,7 +9,7 @@ class kibana::params {
       $git_ref         = 'HEAD'
       $package_ensure  = 'present'
       $service_ensure  = 'running'
-      $service_enabled = 'true'
+      $service_enabled = true
       $service_name    = 'kibana'
       $sysuser         = '_kibana'
       $sysgroup        = '_kibana'

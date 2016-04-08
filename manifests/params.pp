@@ -19,6 +19,7 @@ class kibana::params {
       $pid_file        = '/var/run/kibana/kibana.pid'
       $required_npms   = [ 'bower', 'grunt-cli', ]
       $local_npms      = [ 'angular-mocks', 'glob', ]
+      $install_type    = 'package'	# or may be 'git'
     }
     default: {
       fail("${::module_name} doesn't support osfamily: ${::osfamily}")

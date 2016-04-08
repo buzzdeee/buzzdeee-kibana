@@ -5,22 +5,27 @@ class kibana::service (
   $ensure,
   $enable,
   $service_name,
+  $service_flags,
   $inst_dir,
   $init_script,
   $configfile,
   $sysuser,
+  $install_type,
 ) {
 
   service { $service_name:
     ensure => $ensure,
     enable => $enable,
-    require => File[$init_script],
+    flags   => $service_flags,
   } 
 
-  file { $init_script:
-    owner   => 'root',
-    group   => '0',
-    mode    => '0555',
-    content => template('kibana/kibana.erb')
+  if $install_type == 'git' {
+    file { $init_script:
+      owner   => 'root',
+      group   => '0',
+      mode    => '0555',
+      content => template('kibana/kibana.erb'),
+      before  => Service[$service_name],
+    }
   }
 }

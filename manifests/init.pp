@@ -39,12 +39,14 @@ class kibana (
   $inst_dir                     = $::kibana::params::inst_dir,
   $configfile                   = $::kibana::params::configfile,
   $init_script                  = $::kibana::params::init_script,
+  $install_type                 = $::kibana::params::package_type,
   $git_url                      = $::kibana::params::git_url,
   $git_ref                      = $::kibana::params::git_ref,
   $package_ensure               = $::kibana::params::package_ensure,
   $service_ensure               = $::kibana::params::service_ensure,
   $service_enabled              = $::kibana::params::service_enabled,
   $service_name                 = $::kibana::params::service_name,
+  $service_flags		= undef,
   $sysuser                      = $::kibana::params::sysuser,
   $sysgroup                     = $::kibana::params::sysgroup,
   $sysuid                       = $::kibana::params::sysuid,
@@ -84,6 +86,7 @@ class kibana (
     local_npms    => $local_npms,
     inst_dir      => $inst_dir,
     configfile    => $configfile,
+    install_type  => $install_type,
     git_url       => $git_url,
     git_ref       => $git_ref,
     ensure        => $package_ensure,
@@ -126,13 +129,15 @@ class kibana (
   }
 
   class { 'kibana::service':
-    ensure       => $service_ensure,
-    enable       => $service_enable,
-    service_name => $service_name,
-    inst_dir     => $inst_dir,
-    init_script  => $init_script,
-    configfile   => $configfile,
-    sysuser      => $sysuser,
+    ensure        => $service_ensure,
+    enable        => $service_enable,
+    service_name  => $service_name,
+    service_flags => $service_flags,
+    inst_dir      => $inst_dir,
+    init_script   => $init_script,
+    configfile    => $configfile,
+    sysuser       => $sysuser,
+    install_type  => $install_type
   }
 
   Class['kibana::install'] ->

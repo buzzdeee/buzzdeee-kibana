@@ -16,7 +16,7 @@ class kibana::params {
       $sysuid          = '40000'
       $sysgid          = '40000'
       $logging_dest    = '/var/log/kibana/kibana.log'
-      $pid_file        = '/var/run/kibana/kibana.pid'
+      $pid_file        = undef
       $required_npms   = [ 'bower', 'grunt-cli', ]
       $local_npms      = [ 'angular-mocks', 'glob', ]
       $install_type    = 'package'	# or may be 'git'

@@ -21,6 +21,16 @@ class kibana::params {
       $local_npms      = [ 'angular-mocks', 'glob', ]
       $install_type    = 'package'	# or may be 'git'
     }
+    'Suse': {
+      $package_ensure  = 'present'
+      $service_ensure  = 'running'
+      $service_enabled = true
+      $service_name    = 'kibana'
+      $install_type    = 'package'
+      #$configfile      = '/opt/kibana/config/kibana.yml'
+      $configfile      = '/etc/kibana.yml'
+      $pid_file        = '/var/run/kibana.pid'
+    }
     default: {
       fail("${::module_name} doesn't support osfamily: ${::osfamily}")
     }

@@ -39,7 +39,7 @@ class kibana (
   $inst_dir                     = $::kibana::params::inst_dir,
   $configfile                   = $::kibana::params::configfile,
   $init_script                  = $::kibana::params::init_script,
-  $install_type                 = $::kibana::params::package_type,
+  $install_type                 = $::kibana::params::install_type,
   $git_url                      = $::kibana::params::git_url,
   $git_ref                      = $::kibana::params::git_ref,
   $package_ensure               = $::kibana::params::package_ensure,

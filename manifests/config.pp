@@ -27,6 +27,7 @@ class kibana::config (
   $logging_silent,
   $logging_quiet,
   $logging_verbose,
+  $bundled_plugin_ids,
 ) {
 
   file { $configfile:

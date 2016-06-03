@@ -60,7 +60,7 @@ class kibana (
   $server_basepath              = undef,
   $elasticsearch_url            = undef,
   $elasticsearch_preservehost   = undef,
-  $kibana_index                 = undef,
+  $kibana_index                 = '.kibana',
   $kibana_defaultappid          = undef,
   $elasticsearch_username       = undef,
   $elasticsearch_password       = undef,
@@ -79,6 +79,7 @@ class kibana (
   $logging_silent               = undef,
   $logging_quiet                = undef,
   $logging_verbose              = undef,
+  $bundled_plugin_ids           = $::kibana::params::bundled_plugin_ids,
 ) inherits kibana::params {
 
   class { 'kibana::install':
@@ -126,6 +127,7 @@ class kibana (
     logging_silent               => $logging_silent,
     logging_quiet                => $logging_quiet,
     logging_verbose              => $logging_verbose,
+    bundled_plugin_ids           => $bundled_plugin_ids,
   }
 
   class { 'kibana::service':

@@ -20,6 +20,7 @@ class kibana::params {
       $required_npms   = [ 'bower', 'grunt-cli', ]
       $local_npms      = [ 'angular-mocks', 'glob', ]
       $install_type    = 'package'	# or may be 'git'
+      $bundled_plugin_ids = false
     }
     'Suse': {
       $package_ensure  = 'present'
@@ -27,9 +28,10 @@ class kibana::params {
       $service_enabled = true
       $service_name    = 'kibana'
       $install_type    = 'package'
-      #$configfile      = '/opt/kibana/config/kibana.yml'
-      $configfile      = '/etc/kibana.yml'
+      $configfile      = '/opt/kibana/config/kibana.yml'
+      #$configfile      = '/etc/kibana.yml'
       $pid_file        = '/var/run/kibana.pid'
+      $bundled_plugin_ids = true
     }
     default: {
       fail("${::module_name} doesn't support osfamily: ${::osfamily}")

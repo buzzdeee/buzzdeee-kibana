@@ -3,14 +3,26 @@
 #
 # Kibana is served by a back end server. This controls which port to use.
 # server.port: 5601
-<% if @server_port -%>
+<% if @bundled_plugin_ids -%>
+  <%- if @server_port -%>
+port: <%= @server_port %>
+  <%- end -%>
+<% else -%>
+  <%- if @server_port -%>
 server.port: <%= @server_port %>
+  <%- end -%>
 <% end -%>
 
 # The host to bind the server to.
 # server.host: "0.0.0.0"
-<% if @server_host -%>
+<% if @bundled_plugin_ids -%>
+  <%- if @server_host -%>
+host: "<%= @server_host %>"
+  <%- end -%>
+<% else -%>
+  <%- if @server_host -%>
 server.host: "<%= @server_host %>"
+  <%- end -%>
 <% end -%>
 
 # If you are running kibana behind a proxy, and want to mount it at a path,
@@ -29,21 +41,35 @@ elasticsearch.url: "<%= @elasticsearch_url %>"
 # preserve_elasticsearch_host true will send the hostname specified in `elasticsearch`. If you set it to false,
 # then the host you use to connect to *this* Kibana instance will be sent.
 # elasticsearch.preserveHost: true
-<% if @elasticsearch_preservehost -%>
+<% if @bundled_plugin_ids -%>
+  <%- if @elasticsearch_preservehost -%>
+elasticsearch_preserve_host: <%= @elasticsearch_preservehost %>
+  <%- end -%>
+<% else -%>
+  <%- if @elasticsearch_preservehost -%>
 elasticsearch.preserveHost: <%= @elasticsearch_preservehost %>
+  <%- end -%>
 <% end -%>
 
 # Kibana uses an index in Elasticsearch to store saved searches, visualizations
 # and dashboards. It will create a new index if it doesn't already exist.
 # kibana.index: ".kibana"
-<% if @kibana_index -%>
+<% if @bundled_plugin_ids -%>
+kibana_index: <%= @kibana_index %>
+<% else -%>
 kibana.index: <%= @kibana_index %>
 <% end -%>
 
 # The default application to load.
 # kibana.defaultAppId: "discover"
-<% if @kibana_defaultappid -%>
+<% if @bundled_plugin_ids -%>
+  <%- if @kibana_defaultappid -%>
+default_app_id: <%= @kibana_defaultappid %>
+  <%- end -%>
+<% else -%>
+  <%- if @kibana_defaultappid -%>
 kibana.defaultAppId: <%= @kibana_defaultappid %>
+  <%- end -%>
 <% end -%>
 
 # If your Elasticsearch is protected with basic auth, these are the user credentials
@@ -89,8 +115,14 @@ elasticsearch.ssl.ca: <%= @elasticsearch_ssl_ca %>
 # Set to false to have a complete disregard for the validity of the SSL
 # certificate.
 # elasticsearch.ssl.verify: true
-<% if @elasticsearch_ssl_verify -%>
+<% if @bundled_plugin_ids %>
+  <%- if @elasticsearch_ssl_verify -%>
+verify_ssl: <%= @elasticsearch_ssl_verify %>
+  <%- end -%>
+<% else -%>
+  <%- if @elasticsearch_ssl_verify -%>
 elasticsearch.ssl.verify: <%= @elasticsearch_ssl_verify %>
+  <%- end -%>
 <% end -%>
 
 # Time in milliseconds to wait for elasticsearch to respond to pings, defaults to
@@ -103,15 +135,27 @@ elasticsearch.pingTimeout: <%= @elasticsearch_pingtimeout %>
 # Time in milliseconds to wait for responses from the back end or elasticsearch.
 # This must be > 0
 # elasticsearch.requestTimeout: 300000
-<% if @elasticsearch_requesttimeout -%>
+<% if @bundled_plugin_ids %>
+  <%- if @elasticsearch_requesttimeout -%>
+request_timeout: <%= @elasticsearch_requesttimeout %>
+  <%- end -%>
+<% else -%>
+  <%- if @elasticsearch_requesttimeout -%>
 elasticsearch.requestTimeout: <%= @elasticsearch_requesttimeout %>
+  <%- end -%>
 <% end -%>
 
 # Time in milliseconds for Elasticsearch to wait for responses from shards.
 # Set to 0 to disable.
 # elasticsearch.shardTimeout: 0
-<% if @elasticsearch_shardtimeout -%>
+<% if @bundled_plugin_ids %>
+  <%- if @elasticsearch_shardtimeout -%>
+shard_timeout: <%= @elasticsearch_shardtimeout %>
+  <%- end -%>
+<% else -%>
+  <%- if @elasticsearch_shardtimeout -%>
 elasticsearch.shardTimeout: <%= @elasticsearch_shardtimeout %>
+  <%- end -%>
 <% end -%>
 
 # Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying
@@ -148,4 +192,19 @@ logging.quiet: <%= @logging_quiet %>
 # logging.verbose: false
 <% if @logging_verbose -%>
 logging.verbose: <%= @logging_verbose %>
+<% end -%>
+
+<% if @bundled_plugin_ids %>
+# Plugins that are included in the build, and no longer found in the plugins/ folder
+bundled_plugin_ids:
+ - plugins/dashboard/index
+ - plugins/discover/index
+ - plugins/doc/index
+ - plugins/kibana/index
+ - plugins/markdown_vis/index
+ - plugins/metric_vis/index
+ - plugins/settings/index
+ - plugins/table_vis/index
+ - plugins/vis_types/index
+ - plugins/visualize/index
 <% end -%>

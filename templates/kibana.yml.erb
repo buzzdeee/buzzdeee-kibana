@@ -35,13 +35,13 @@ server.basePath: "<%= @server_basepath %>"
 # The Elasticsearch instance to use for all your queries.
 # elasticsearch.url: "http://localhost:9200"
 <% if @bundled_plugin_ids -%>
-  <% if @elasticsearch_url -%>
+  <%- if @elasticsearch_url -%>
 elasticsearch_url: "<%= @elasticsearch_url %>"
-  <% end -%>
+  <%- end -%>
 <% else -%>
-  <% if @elasticsearch_url -%>
+  <%- if @elasticsearch_url -%>
 elasticsearch.url: "<%= @elasticsearch_url %>"
-  <% end -%>
+  <%- end -%>
 <% end -%>
 
 # preserve_elasticsearch_host true will send the hostname specified in `elasticsearch`. If you set it to false,

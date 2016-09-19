@@ -9,7 +9,7 @@ class kibana::params {
       $git_ref         = 'HEAD'
       $package_ensure  = 'present'
       $service_ensure  = 'running'
-      $service_enabled = true
+      $service_enable  = true
       $service_name    = 'kibana'
       $sysuser         = '_kibana'
       $sysgroup        = '_kibana'
@@ -25,7 +25,7 @@ class kibana::params {
     'Suse': {
       $package_ensure  = 'present'
       $service_ensure  = 'running'
-      $service_enabled = true
+      $service_enable  = true
       $service_name    = 'kibana'
       $install_type    = 'package'
       $configfile      = '/opt/kibana/config/kibana.yml'

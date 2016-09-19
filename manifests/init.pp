@@ -44,7 +44,7 @@ class kibana (
   $git_ref                      = $::kibana::params::git_ref,
   $package_ensure               = $::kibana::params::package_ensure,
   $service_ensure               = $::kibana::params::service_ensure,
-  $service_enabled              = $::kibana::params::service_enabled,
+  $service_enable               = $::kibana::params::service_enable,
   $service_name                 = $::kibana::params::service_name,
   $service_flags		= undef,
   $sysuser                      = $::kibana::params::sysuser,

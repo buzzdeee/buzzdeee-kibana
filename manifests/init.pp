@@ -54,6 +54,12 @@ class kibana (
   $required_npms                = $::kibana::params::required_npms,
   $local_npms                   = $::kibana::params::local_npms,
 
+  $manage_repo                  = false,
+  $repo_version                 = undef,
+  $repo_stage                   = false,
+  $package_pin                  = true,
+  $version                      = false,
+
   # parameters below steer the configuration file
   $server_port                  = undef,
   $server_host                  = undef,
@@ -81,6 +87,52 @@ class kibana (
   $logging_verbose              = undef,
   $bundled_plugin_ids           = $::kibana::params::bundled_plugin_ids,
 ) inherits kibana::params {
+
+
+  if ($manage_repo == true) {
+    if $repo_version == undef {
+      fail('Please fill in a repository version at $repo_version')
+    } else {
+      validate_string($repo_version)
+    }
+  }
+
+  if ($version != false) {
+    case $::osfamily {
+      'RedHat', 'Linux', 'Suse': {
+        if ($version =~ /.+-\d/) {
+          $real_version = $version
+        } else {
+          $real_version = "${version}-1"
+        }
+      }
+      default: {
+        $real_version = $version
+      }
+    }
+  }
+
+
+  if ($manage_repo == true) {
+
+    if ($repo_stage == false) {
+      # use anchor for ordering
+
+      # Set up repositories
+      class { 'kibana::repo': }
+
+    } else {
+      # use staging for ordering
+
+      if !(defined(Stage[$repo_stage])) {
+        stage { $repo_stage:  before => Stage['main'] }
+      }
+
+      class { 'kibana::repo':
+        stage => $repo_stage,
+      }
+    }
+  }
 
   class { 'kibana::install':
     required_npms => $required_npms,

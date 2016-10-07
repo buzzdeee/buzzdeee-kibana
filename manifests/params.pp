@@ -15,7 +15,6 @@ class kibana::params {
       $pid_file        = undef
       $required_npms   = [ 'bower', 'grunt-cli', ]
       $local_npms      = [ 'angular-mocks', 'glob', ]
-      $install_type    = 'package'	# or may be 'git'
       $bundled_plugin_ids = false
       $manage_repo = false
     }
@@ -39,6 +38,6 @@ class kibana::params {
   $service_ensure  = 'running'
   $service_enable  = true
   $package_ensure  = 'present'
-  $install_type    = 'package'
+  $install_type    = 'package' # or may be 'git'
   
 }
